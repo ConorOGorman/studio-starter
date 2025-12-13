@@ -14,137 +14,124 @@ export default async function AdminProjectsPage() {
 
   if (error) {
     return (
-      <div style={{ maxWidth: 1000, margin: '0 auto', padding: 24 }}>
-        <p>Failed to load projects: {error.message}</p>
+      <div className="mx-auto w-full max-w-[1000px] px-4 py-6 sm:px-6 sm:py-8 md:px-8 md:py-12">
+        <p className="text-sm sm:text-base">Failed to load projects: {error.message}</p>
       </div>
     )
   }
 
   return (
-    <div style={{ maxWidth: 1000, margin: '0 auto', padding: 24 }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 16 }}>
-        <div>
-          <h1 style={{ fontSize: 28, marginBottom: 4 }}>Projects</h1>
-          <p style={{ opacity: 0.8 }}>Create and manage portfolio projects.</p>
+    <div className="mx-auto w-full max-w-[1000px] px-4 py-6 sm:px-6 sm:py-8 md:px-8 md:py-12">
+      <div className="flex flex-col gap-4 sm:flex-row sm:justify-between sm:items-center sm:gap-4">
+        <div className="min-w-0 flex-1">
+          <h1 className="text-xl sm:text-2xl md:text-[28px] font-semibold mb-1 sm:mb-2">Projects</h1>
+          <p className="text-sm sm:text-base opacity-80">Create and manage portfolio projects.</p>
         </div>
-        <div style={{ display: 'flex', gap: 12 }}>
-          <Link href="/admin">Dashboard</Link>
-          <Link href="/admin/analytics">Analytics</Link>
+        <div className="flex gap-3 sm:gap-4 flex-shrink-0">
+          <Link href="/admin" className="px-3 py-2 text-sm sm:text-base min-h-[44px] flex items-center justify-center border border-[#333] rounded-lg hover:bg-gray-50 transition-colors">
+            Dashboard
+          </Link>
+          <Link href="/admin/analytics" className="px-3 py-2 text-sm sm:text-base min-h-[44px] flex items-center justify-center border border-[#333] rounded-lg hover:bg-gray-50 transition-colors">
+            Analytics
+          </Link>
         </div>
       </div>
 
-      <div style={{ marginTop: 20, border: '1px solid #333', borderRadius: 12, padding: 14 }}>
-        <h2 style={{ fontSize: 18, marginBottom: 10 }}>Add new project</h2>
-        <form action={createProject} style={{ display: 'grid', gap: 10 }}>
+      <div className="mt-5 sm:mt-6 border border-[#333] rounded-xl p-3 sm:p-4">
+        <h2 className="text-base sm:text-lg md:text-[18px] font-semibold mb-2 sm:mb-3">Add new project</h2>
+        <form action={createProject} className="grid gap-3 sm:gap-4">
           <input
             name="title"
             placeholder="Title (required)"
             required
-            style={{ padding: 10, borderRadius: 10, border: '1px solid #333' }}
+            className="w-full px-3 py-2 sm:px-4 sm:py-2.5 text-sm sm:text-base rounded-lg border border-[#333] min-h-[44px]"
           />
           <textarea
             name="description"
             placeholder="Description"
             rows={3}
-            style={{ padding: 10, borderRadius: 10, border: '1px solid #333' }}
+            className="w-full px-3 py-2 sm:px-4 sm:py-2.5 text-sm sm:text-base rounded-lg border border-[#333] resize-y min-h-[80px]"
           />
           <input
             name="image_url"
             placeholder="Image URL"
-            style={{ padding: 10, borderRadius: 10, border: '1px solid #333' }}
+            className="w-full px-3 py-2 sm:px-4 sm:py-2.5 text-sm sm:text-base rounded-lg border border-[#333] min-h-[44px]"
           />
           <input
             name="project_url"
             placeholder="Project URL"
-            style={{ padding: 10, borderRadius: 10, border: '1px solid #333' }}
+            className="w-full px-3 py-2 sm:px-4 sm:py-2.5 text-sm sm:text-base rounded-lg border border-[#333] min-h-[44px]"
           />
           <input
             name="technologies"
             placeholder="Technologies (comma-separated)"
-            style={{ padding: 10, borderRadius: 10, border: '1px solid #333' }}
+            className="w-full px-3 py-2 sm:px-4 sm:py-2.5 text-sm sm:text-base rounded-lg border border-[#333] min-h-[44px]"
           />
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-            <input type="checkbox" name="featured" />
-            <label>Featured</label>
+          <div className="flex items-center gap-2 sm:gap-3 min-h-[44px]">
+            <input type="checkbox" name="featured" className="w-4 h-4 sm:w-5 sm:h-5 cursor-pointer" />
+            <label className="text-sm sm:text-base cursor-pointer">Featured</label>
           </div>
           <button
             type="submit"
-            style={{
-              padding: '10px 14px',
-              borderRadius: 10,
-              border: '1px solid #333',
-              cursor: 'pointer',
-            }}
+            className="px-4 py-3 sm:px-5 sm:py-3 min-h-[44px] text-sm sm:text-base rounded-lg border border-[#333] cursor-pointer hover:bg-gray-50 transition-colors w-full sm:w-auto"
           >
             Create project
           </button>
         </form>
       </div>
 
-      <div style={{ marginTop: 20 }}>
-        <h2 style={{ fontSize: 18, marginBottom: 10 }}>Existing projects</h2>
+      <div className="mt-5 sm:mt-6">
+        <h2 className="text-base sm:text-lg md:text-[18px] font-semibold mb-2 sm:mb-3">Existing projects</h2>
         {!projects?.length ? (
-          <p style={{ opacity: 0.8 }}>No projects yet.</p>
+          <p className="text-sm sm:text-base opacity-80">No projects yet.</p>
         ) : (
-          <div style={{ display: 'grid', gap: 12 }}>
+          <div className="grid gap-3 sm:gap-4">
             {projects.map((p) => (
-              <div key={p.id} style={{ border: '1px solid #333', borderRadius: 12, padding: 14 }}>
-                <details style={{ cursor: 'pointer', fontSize: 16 }}>
-                  <summary>
-                    {p.title} {p.featured ? '(featured)' : ''}
-                  </summary>
-                  <form action={updateProject.bind(null, p.id)} style={{ display: 'grid', gap: 10, marginTop: 12 }}>
+              <div key={p.id} className="border border-[#333] rounded-xl p-3 sm:p-4">
+                <details className="cursor-pointer text-sm sm:text-base">
+                  <summary className="font-medium mb-2 sm:mb-3">{p.title} {p.featured ? '(featured)' : ''}</summary>
+                  <form action={updateProject.bind(null, p.id)} className="grid gap-3 sm:gap-4 mt-3 sm:mt-4">
                     <input
                       name="title"
                       defaultValue={p.title ?? ''}
                       required
-                      style={{ padding: 10, borderRadius: 10, border: '1px solid #333' }}
+                      className="w-full px-3 py-2 sm:px-4 sm:py-2.5 text-sm sm:text-base rounded-lg border border-[#333] min-h-[44px]"
                     />
                     <textarea
                       name="description"
                       defaultValue={p.description ?? ''}
                       rows={3}
-                      style={{ padding: 10, borderRadius: 10, border: '1px solid #333' }}
+                      className="w-full px-3 py-2 sm:px-4 sm:py-2.5 text-sm sm:text-base rounded-lg border border-[#333] resize-y min-h-[80px]"
                     />
                     <input
                       name="image_url"
                       defaultValue={p.image_url ?? ''}
-                      style={{ padding: 10, borderRadius: 10, border: '1px solid #333' }}
+                      className="w-full px-3 py-2 sm:px-4 sm:py-2.5 text-sm sm:text-base rounded-lg border border-[#333] min-h-[44px]"
                     />
                     <input
                       name="project_url"
                       defaultValue={p.project_url ?? ''}
-                      style={{ padding: 10, borderRadius: 10, border: '1px solid #333' }}
+                      className="w-full px-3 py-2 sm:px-4 sm:py-2.5 text-sm sm:text-base rounded-lg border border-[#333] min-h-[44px]"
                     />
                     <input
                       name="technologies"
                       defaultValue={Array.isArray(p.technologies) ? p.technologies.join(', ') : ''}
-                      style={{ padding: 10, borderRadius: 10, border: '1px solid #333' }}
+                      className="w-full px-3 py-2 sm:px-4 sm:py-2.5 text-sm sm:text-base rounded-lg border border-[#333] min-h-[44px]"
                     />
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                      <input type="checkbox" name="featured" defaultChecked={!!p.featured} />
-                      <label>Featured</label>
+                    <div className="flex items-center gap-2 sm:gap-3 min-h-[44px]">
+                      <input type="checkbox" name="featured" defaultChecked={!!p.featured} className="w-4 h-4 sm:w-5 sm:h-5 cursor-pointer" />
+                      <label className="text-sm sm:text-base cursor-pointer">Featured</label>
                     </div>
-                    <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+                    <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
                       <button
                         type="submit"
-                        style={{
-                          padding: '10px 14px',
-                          borderRadius: 10,
-                          border: '1px solid #333',
-                          cursor: 'pointer',
-                        }}
+                        className="px-4 py-3 sm:px-5 sm:py-3 min-h-[44px] text-sm sm:text-base rounded-lg border border-[#333] cursor-pointer hover:bg-gray-50 transition-colors w-full sm:w-auto"
                       >
                         Save changes
                       </button>
                       <button
                         formAction={deleteProject.bind(null, p.id)}
-                        style={{
-                          padding: '10px 14px',
-                          borderRadius: 10,
-                          border: '1px solid #333',
-                          cursor: 'pointer',
-                        }}
+                        className="px-4 py-3 sm:px-5 sm:py-3 min-h-[44px] text-sm sm:text-base rounded-lg border border-[#333] cursor-pointer hover:bg-gray-50 transition-colors w-full sm:w-auto"
                       >
                         Delete
                       </button>

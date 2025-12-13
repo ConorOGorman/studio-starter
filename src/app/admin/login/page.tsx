@@ -14,19 +14,14 @@ export default function AdminLoginPage() {
   }
 
   return (
-    <div style={{ maxWidth: 720, margin: '0 auto', padding: 24 }}>
-      <h1 style={{ fontSize: 28, marginBottom: 8 }}>Admin Login</h1>
-      <p style={{ opacity: 0.8, marginBottom: 16 }}>
+    <div className="mx-auto w-full max-w-[720px] px-4 py-8 sm:px-6 sm:py-12 md:px-8 md:py-16">
+      <h1 className="text-xl sm:text-2xl md:text-[28px] font-semibold mb-2 sm:mb-3">Admin Login</h1>
+      <p className="text-sm sm:text-base opacity-80 mb-4 sm:mb-6">
         Sign in with your Google account. Access is restricted to allowlisted admins.
       </p>
       <button
         onClick={signIn}
-        style={{
-          padding: '10px 14px',
-          borderRadius: 10,
-          border: '1px solid #333',
-          cursor: 'pointer',
-        }}
+        className="px-4 py-3 sm:px-5 sm:py-3 min-h-[44px] text-sm sm:text-base rounded-lg border border-[#333] cursor-pointer hover:bg-gray-50 transition-colors w-full sm:w-auto"
       >
         Sign in with Google
       </button>

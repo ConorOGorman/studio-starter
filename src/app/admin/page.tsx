@@ -18,45 +18,42 @@ export default async function AdminDashboardPage() {
     .limit(5)
 
   return (
-    <div style={{ maxWidth: 1000, margin: '0 auto', padding: 24 }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', gap: 16, alignItems: 'center' }}>
-        <div>
-          <h1 style={{ fontSize: 28, marginBottom: 4 }}>Admin Dashboard</h1>
-          <p style={{ opacity: 0.8 }}>Signed in as {user.email}</p>
+    <div className="mx-auto w-full max-w-[1000px] px-4 py-6 sm:px-6 sm:py-8 md:px-8 md:py-12">
+      <div className="flex flex-col gap-4 sm:flex-row sm:justify-between sm:items-center sm:gap-4">
+        <div className="min-w-0 flex-1">
+          <h1 className="text-xl sm:text-2xl md:text-[28px] font-semibold mb-1 sm:mb-2">Admin Dashboard</h1>
+          <p className="text-sm sm:text-base opacity-80 break-words">Signed in as {user.email}</p>
         </div>
-        <div style={{ display: 'flex', gap: 12 }}>
-          <Link href="/admin/projects">Projects</Link>
-          <Link href="/admin/analytics">Analytics</Link>
-        </div>
-      </div>
-
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-          gap: 12,
-          marginTop: 20,
-        }}
-      >
-        <div style={{ border: '1px solid #333', borderRadius: 12, padding: 14 }}>
-          <p style={{ opacity: 0.75 }}>Total Projects</p>
-          <p style={{ fontSize: 26, marginTop: 6 }}>{totalProjects ?? 0}</p>
-        </div>
-        <div style={{ border: '1px solid #333', borderRadius: 12, padding: 14 }}>
-          <p style={{ opacity: 0.75 }}>Featured Projects</p>
-          <p style={{ fontSize: 26, marginTop: 6 }}>{featuredProjects ?? 0}</p>
+        <div className="flex gap-3 sm:gap-4 flex-shrink-0">
+          <Link href="/admin/projects" className="px-3 py-2 text-sm sm:text-base min-h-[44px] flex items-center justify-center border border-[#333] rounded-lg hover:bg-gray-50 transition-colors">
+            Projects
+          </Link>
+          <Link href="/admin/analytics" className="px-3 py-2 text-sm sm:text-base min-h-[44px] flex items-center justify-center border border-[#333] rounded-lg hover:bg-gray-50 transition-colors">
+            Analytics
+          </Link>
         </div>
       </div>
 
-      <div style={{ marginTop: 20 }}>
-        <h2 style={{ fontSize: 18, marginBottom: 10 }}>Recent Projects</h2>
-        <div style={{ border: '1px solid #333', borderRadius: 12, padding: 14 }}>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mt-5 sm:mt-6">
+        <div className="border border-[#333] rounded-xl p-3 sm:p-4">
+          <p className="text-sm sm:text-base opacity-75">Total Projects</p>
+          <p className="text-2xl sm:text-3xl md:text-[26px] mt-2 sm:mt-3 font-semibold">{totalProjects ?? 0}</p>
+        </div>
+        <div className="border border-[#333] rounded-xl p-3 sm:p-4">
+          <p className="text-sm sm:text-base opacity-75">Featured Projects</p>
+          <p className="text-2xl sm:text-3xl md:text-[26px] mt-2 sm:mt-3 font-semibold">{featuredProjects ?? 0}</p>
+        </div>
+      </div>
+
+      <div className="mt-5 sm:mt-6">
+        <h2 className="text-base sm:text-lg md:text-[18px] font-semibold mb-2 sm:mb-3">Recent Projects</h2>
+        <div className="border border-[#333] rounded-xl p-3 sm:p-4">
           {!recentProjects?.length ? (
-            <p style={{ opacity: 0.8 }}>No projects yet.</p>
+            <p className="text-sm sm:text-base opacity-80">No projects yet.</p>
           ) : (
-            <ul style={{ margin: 0, paddingLeft: 18 }}>
+            <ul className="m-0 pl-4 sm:pl-5 space-y-2">
               {recentProjects.map((p) => (
-                <li key={p.id} style={{ marginBottom: 6 }}>
+                <li key={p.id} className="text-sm sm:text-base mb-2 last:mb-0">
                   {p.title} {p.featured ? '(featured)' : ''}
                 </li>
               ))}

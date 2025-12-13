@@ -8,6 +8,6 @@ type ContainerProps = {
 
 export function Container({ children, className = "", as = "div" }: ContainerProps) {
   const Tag = as as any;
-  const base = "mx-auto w-full max-w-screen-xl px-4 sm:px-6 md:px-8 lg:px-[100px]";
+  const base = "mx-auto w-full max-w-screen-xl px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16";
   return <Tag className={`${base} ${className}`.trim()}>{children}</Tag>;
 }
