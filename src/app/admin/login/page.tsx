@@ -1,11 +1,14 @@
 'use client'
 
 import { supabaseBrowser } from '@/lib/supabase/browser'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { useEffect } from 'react'
 
 export default function AdminLoginPage() {
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const authError = searchParams.get('error')
+  const authErrorDescription = searchParams.get('error_description')
 
   useEffect(() => {
     const supabase = supabaseBrowser()
@@ -40,6 +43,12 @@ export default function AdminLoginPage() {
   return (
     <div className="mx-auto w-full max-w-[720px] px-4 py-8 sm:px-6 sm:py-12 md:px-8 md:py-16">
       <h1 className="text-xl sm:text-2xl md:text-[28px] font-semibold mb-2 sm:mb-3">Admin Login</h1>
+      {authError ? (
+        <div className="mb-4 sm:mb-6 rounded-xl border border-red-300 bg-red-50 p-3 text-sm text-red-900">
+          <p className="font-semibold">Sign-in failed</p>
+          <p className="mt-1 opacity-90">{authErrorDescription ?? authError}</p>
+        </div>
+      ) : null}
       <p className="text-sm sm:text-base opacity-80 mb-4 sm:mb-6">
         Sign in with your Google account. Access is restricted to allowlisted admins.
       </p>
