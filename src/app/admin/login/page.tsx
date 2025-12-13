@@ -1,16 +1,40 @@
 'use client'
 
 import { supabaseBrowser } from '@/lib/supabase/browser'
+import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
 
 export default function AdminLoginPage() {
+  const router = useRouter()
+
+  useEffect(() => {
+    const supabase = supabaseBrowser()
+
+    const checkExistingSession = async () => {
+      const { data } = await supabase.auth.getSession()
+      if (data.session) router.replace('/admin')
+    }
+
+    checkExistingSession()
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (session) router.replace('/admin')
+    })
+
+    return () => subscription.unsubscribe()
+  }, [router])
+
   const signIn = async () => {
     const supabase = supabaseBrowser()
-    await supabase.auth.signInWithOAuth({
+    const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
         redirectTo: `${window.location.origin}/auth/callback`,
       },
     })
+    if (error) console.error(error)
   }
 
   return (
