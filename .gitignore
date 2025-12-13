@@ -10,6 +10,7 @@ coverage
 .next/
 out/
 build
+.next-start.*
 
 # misc
 .DS_Store
